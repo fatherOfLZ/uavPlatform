@@ -40,38 +40,40 @@
     </header>
 
     <div class="main-content">
-      <div class="left-column">
-        <div class="card terminal-card">
-          <h3>[SYS] 自然语言指令 (Prompt)</h3>
-          <div class="terminal-text">
-            <p class="sys-log">> object_description_with_help:</p>
-            <p class="highlight-text">"Compass north corresponds to the top of the bird's-eye-view image. The target location is 50.39 degrees north by east from the starting point. The description of the target and its surrounding is shown below."</p>
-            <p class="sys-log">> object_description:</p>
-            <p class="highlight-text">"The red car is positioned on a street next to a house with a garage, surrounded by tall green hedges on one side and power lines overhead. The street is open with clear skies above, and there is a shadow of the vehicle visible on the pavement."</p>
+      <div class="panel panel-center">
+        <div class="center-left-column">
+          <div class="card terminal-card">
+            <h3>[SYS] 自然语言指令 (Prompt)</h3>
+            <div class="terminal-text">
+              <p class="sys-log"><br>object_description_with_help:</p>
+              <p class="highlight-text">"指南针正北方向对应于鸟瞰图的顶部。目标位置位于起始点以北偏东 50.39 度。目标及其周围环境的描述如下所示。这辆红色汽车停在一条街道上，旁边是一栋带车库的房子，一侧是高高的绿色树篱，上方是高压电线。街道开阔，天空晴朗，路面上可以看到汽车的影子。"</p>
+              <p class="sys-log">object_description:</p>
+              <p class="highlight-text">"那辆红色汽车停在一条街道上，旁边是一栋带车库的房子，一侧是高高的绿色树篱，头顶是高压电线。街道开阔，天空晴朗，人行道上可以看到汽车的影子。"</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="panel panel-center">
-        <div class="video-wrapper card">
-          <video
-              ref="mainVideo"
-              src="./assets/video/video1.mp4"
-              loop
-              muted
-              class="main-video"
-          ></video>
-        </div>
+        <div class="center-right-column">
+          <div class="video-wrapper card">
+            <video
+                ref="mainVideo"
+                src="./assets/video/video1.mp4"
+                loop
+                muted
+                class="main-video"
+            ></video>
+          </div>
 
-        <div class="card data-stream-card">
-          <h3>实时飞行轨迹与动作流 (Live Telemetry)</h3>
-          <div class="terminal-text scroll-auto">
-            <p class="sys-log">--- 低空 UAV Trajectory ---</p>
-            <p v-for="(pos, index) in highUavTraj" :key="'h'+index">[{{ pos.join(', ') }}]</p>
-            <p class="sys-log mt-2">--- 低空 UAV Pose & Actions ---</p>
-            <p v-for="(pos, index) in lowUavTraj" :key="'l'+index">
-              POS: [{{ pos[0].toFixed(2) }}, {{ pos[1].toFixed(2) }}, {{ pos[2].toFixed(2) }}] | ACT: {{ actions[index] || 8 }}
-            </p>
+          <div class="card data-stream-card">
+            <h3>实时飞行轨迹与动作流 (Live Telemetry)</h3>
+            <div class="terminal-text scroll-auto">
+              <p class="sys-log">--- 低空 UAV Trajectory ---</p>
+              <p v-for="(pos, index) in highUavTraj" :key="'h'+index">[{{ pos.join(', ') }}]</p>
+              <p class="sys-log mt-2">--- 低空 UAV Pose & Actions ---</p>
+              <p v-for="(pos, index) in lowUavTraj" :key="'l'+index">
+                POS: [{{ pos[0].toFixed(2) }}, {{ pos[1].toFixed(2) }}, {{ pos[2].toFixed(2) }}] | ACT: {{ actions[index] || 8 }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -256,8 +258,9 @@ body { background-color: #0b1120; color: #e2e8f0; font-family: 'Helvetica Neue',
 
 /* --- 主内容区布局 --- */
 .main-content { display: flex; gap: 15px; align-items: stretch; margin-bottom: 15px; }
-.left-column { flex: 0 0 25%; display: flex; flex-direction: column; gap: 10px; }
-.panel-center { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.panel-center { flex: 1; display: flex; gap: 15px; }
+.center-left-column { flex: 0 0 30%; display: flex; flex-direction: column; }
+.center-right-column { flex: 1; display: flex; flex-direction: column; gap: 10px; }
 .right-column { flex: 0 0 25%; display: flex; flex-direction: column; gap: 10px; }
 
 /* --- 卡片通用样式 --- */
@@ -265,7 +268,8 @@ body { background-color: #0b1120; color: #e2e8f0; font-family: 'Helvetica Neue',
 .card h3 { color: #38bdf8; font-size: 14px; margin-bottom: 10px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 4px; display: flex; justify-content: space-between;}
 
 /* --- 终端风格框 (Prompt & 数据流) --- */
-.terminal-text { font-family: 'Consolas', monospace; font-size: 12px; line-height: 1.5; background: #000; padding: 10px; border-radius: 4px; border: 1px solid #333; }
+.terminal-text { font-family: 'Consolas', monospace; font-size: 15px; line-height: 1.7; background: #000; padding: 10px; border-radius: 4px; border: 1px solid #333; flex: 1; }
+.terminal-card { flex: 1; }
 .scroll-auto { max-height: 150px; overflow-y: auto; }
 .scroll-auto::-webkit-scrollbar { width: 4px; }
 .scroll-auto::-webkit-scrollbar-thumb { background: #333; }
